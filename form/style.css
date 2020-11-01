@@ -1,0 +1,15 @@
+
+#container{
+    background-color: #f1c40f;
+    border: 10px;
+    display: inline-block;
+    padding: 20px;
+}
+
+.error {
+    color: #e74c3c;
+}
+
+.small {
+    display: inline-block;
+}
