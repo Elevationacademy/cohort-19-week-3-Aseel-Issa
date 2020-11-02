@@ -1,0 +1,123 @@
+#container{
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-template-areas: 
+    "s m"
+    "s m"
+    "s m"
+    "s m"
+    "s m"
+    "s m"
+    "s m"
+    "s m"
+    "s m"
+    "s m"
+    "s m"
+    "s m"
+    "s f";
+}
+
+
+.side-nav{
+    grid-area: s;
+    background-color: rgb(170, 94, 241);
+    display: grid;
+    grid-template-rows: 1.4fr repeat(4, 1fr);
+    grid-column-gap: 5vh;
+    padding: 1em;
+}
+
+.main{
+    grid-area: m;
+    background-color: rgb(243, 232, 232);
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    padding-bottom: 2em;
+    padding-top: 2em;
+    padding-right: 1em;
+    grid-gap: 6em;
+}
+
+.foot{
+    display: grid;
+    grid-area: f;
+    grid-template-columns: 4fr 1.5fr;
+}
+
+
+.message{
+    display: flex;
+    grid-template-areas: "t h e";
+    margin-left: 1em;
+    /* height: 2em; */
+    font-family: fantasy;
+    font-style: italic;
+}
+.message > .text {
+    background-color: rgb(172, 170, 170);
+    /* border: 2px solid; */
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.message > .hour {
+    background-color: rgb(172, 170, 170);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.myMessage{
+    grid-template-areas: "e t h";
+}
+.myMessage > .text {
+    background-color:rgb(61, 194, 61);
+}
+.myMessage > .hour {
+    background-color: rgb(61, 194, 61);
+}
+.hour > p {
+    vertical-align: text-bottom;
+}
+
+.text{
+    /* display: inline-block; */
+    grid-area: t;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    flex-grow: 2;
+    line-height: normal;
+}
+.hour{
+    /* display: inline-block; */
+    grid-area: h;
+    font-size: 10px;
+    display: flex;
+    align-items: flex-end;
+    padding: 2px;
+    flex-grow: 0.5;
+    line-height: normal;
+}
+.empty{
+    display: block;
+    grid-area: e;
+    flex-grow: 35;
+    /* min-width: 1vw; */
+}
+
+.friends{
+    background-color: rgb(183, 138, 226);
+    display: inline-block;
+    height: 2em;
+    /* vertical-align: middle; */
+    display: flex;
+    align-items: center;
+    padding: 3px;
+    font-size: 12px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+button{
+    background-color: rgb(170, 94, 241);
+}
