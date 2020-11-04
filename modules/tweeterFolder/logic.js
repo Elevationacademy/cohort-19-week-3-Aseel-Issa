@@ -1,25 +1,47 @@
 
-// Outer functions
+// Outer functions (to be reused as if they are inheretend from a parent class)
 // remove element from the array
 const removeElementById = (array, id) => {
-    if(id < array.length && id >=0){
-        array = array.slice((id, 1))
-        // changing the id number of the comments after the deleted one, so they keep matching their indexes
-        // Not perfect solution
-        for(let i=id; i < array.length; i++){
-            array[id].setId(i)
+    for(let i=0; i<array.length; i++){
+        if(array[i].getId() == id){
+            array = array.slice((id, 1))
         }
-    }else{
-        console.log("The Id is not in the range of the array")
     }
     return array
 }
+
+// remove element from the array
+// const removeElementById = (array, id) => {
+//     if(id < array.length && id >=0){
+//         array = array.slice((id, 1))
+//         // changing the id number of the comments after the deleted one, so they keep matching their indexes
+//         // Not perfect solution
+//         for(let i=id; i < array.length; i++){
+//             array[id].setId(i)
+//         }
+//     }else{
+//         console.log("The Id is not in the range of the array")
+//     }
+//     return array
+// }
+
 // get element from an array
+// const getElementById = (array, id) => {
+//     if(id < array.length && id >=0){
+//         return array[id]
+//     }else{
+//         return null
+//     }
+// }
+
+// get element from an array, returns null of not found 
 const getElementById = (array, id) => {
-    if(id < array.length && id >=0){
-        return array[id]
-    }else{
-        return null
+    for(let i=0; i<array.length; i++){
+        if(array[i].getId() == id){
+            return array[id]
+        }else{
+            return null
+        }
     }
 }
 
@@ -57,7 +79,7 @@ const Tweets = function(){
             return{
                 getcommentContent,
                 setcommentContent,
-                getcommentId,
+                getId: getcommentId,
                 setId: setcommentId
             }
         }
@@ -75,7 +97,9 @@ const Tweets = function(){
         // add a comment to the tweet
         const addComment = (value) => {
             const comment  = Comment(value)
-            comment.setId(comments.length)
+           // comment.setId("T"+this.getId()+"-"+comments.length)
+           // this refers to the global object instead of the one who called the function even though we are using arrow function
+           comment.setId("C-"+comments.length)
             addElement(comments, comment)
             return comment
         } 
@@ -93,15 +117,20 @@ const Tweets = function(){
             return comments.length
         }
 
+        const getComments = () => {
+            return comments
+        }
+
         return{
             getTweetContent,
             setTweetContent,
-            getTweetId,
+            getId: getTweetId,
             setId : setTweetId,
             addComment,
             removeCommentById,
             getCommentById,
-            getNumberOfComments
+            getNumberOfComments,
+            getComments
         }
 
     }
@@ -126,33 +155,17 @@ const Tweets = function(){
         allTweets = removeElementById(allTweets, id)
     }
 
+    const getAllTweets = () => {
+        return allTweets
+    }
+
     return {
         postTweet,
         getTweetById,
-        removeTweetById
+        removeTweetById,
+        getPosts: getAllTweets
     }
 
 }
 // ================End of Tweets module================================================
 
-const test = function(){
-    const tweetsList = Tweets()
-    const tweet = tweetsList.postTweet("My first tweet")
-    tweet.addComment("My first comment")
-    tweet.addComment("My Second comment")
-    tweet.addComment("My Third comment")
-
-    console.log("Before deletion, Tweet: "+tweet.getTweetContent())
-    for (let i=0; i<tweet.getNumberOfComments(); i++){
-        console.log("   "+i+"-Comment: "+tweet.getCommentById(i).getcommentContent())
-    }
-
-    tweet.removeCommentById(1)
-
-    console.log("After deletion, Tweet: "+tweet.getTweetContent())
-    for (let i=0; i<tweet.getNumberOfComments(); i++){
-        console.log("   "+i+"-Comment: "+tweet.getCommentById(i).getcommentContent())
-    }
-}
-
-test()
